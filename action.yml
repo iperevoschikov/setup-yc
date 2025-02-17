@@ -1,0 +1,25 @@
+name: "Install Yandex Cloud CLI"
+description: "Installs Yandex Cloud CLI for interaction with Yandex Cloud"
+inputs:
+  oauthToken:
+    description: "Yandex Cloud OAuth token"
+    required: false
+runs:
+  using: "composite"
+  steps:
+    - name: Download and install Yandex Cloud CLI
+      shell: bash
+      run: |
+        curl https://storage.yandexcloud.net/yandexcloud-yc/install.sh | bash
+        echo 'export PATH=$HOME/yandex-cloud/bin:$PATH' >> $GITHUB_ENV
+        export PATH=$HOME/yandex-cloud/bin:$PATH
+        source $GITHUB_ENV
+        source ~/.bashrc
+        which yc
+        yc --version
+
+    - name: Set OAuth token
+      shell: bash
+      if: ${{inputs.oauthToken != ''}}
+      run: |
+        yc config set token ${{ secrets.YC_OAUTH_TOKEN }}
