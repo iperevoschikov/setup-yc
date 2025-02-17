@@ -11,9 +11,9 @@ runs:
       shell: bash
       run: |
         curl https://storage.yandexcloud.net/yandexcloud-yc/install.sh | bash
-        echo 'export PATH=$HOME/yandex-cloud/bin:$PATH' >> $GITHUB_ENV
+        echo "$HOME/yandex-cloud/bin" >> $GITHUB_PATH
         export PATH=$HOME/yandex-cloud/bin:$PATH
-        source $GITHUB_ENV
+        source $GITHUB_PATH
         source ~/.bashrc
         which yc
         yc --version
