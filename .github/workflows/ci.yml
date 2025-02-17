@@ -11,7 +11,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: iperevoschikov/setup-yc@${{ github.GITHUB_SHA }}
+      - uses: iperevoschikov/setup-yc@main
 
       - name: Run a one-line script
         run: yc --version
